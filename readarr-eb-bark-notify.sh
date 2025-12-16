@@ -117,10 +117,10 @@ Indexer: ${readarr_release_indexer}
 Size: ${readarr_release_size}"
 
         # Build Readarr URL
-        if [ -n "$READARR_URL" ] && [ -n "$readarr_book_id" ]; then
-            url="${READARR_URL}/book/${readarr_book_id}"
+        if [ -n "$READARR_EB_URL" ] && [ -n "$readarr_book_id" ]; then
+            url="${READARR_EB_URL}/book/${readarr_book_id}"
         else
-            url="$READARR_URL"
+            url="$READARR_EB_URL"
         fi
 
         # Escape for JSON
@@ -138,10 +138,10 @@ Quality: ${readarr_bookfile_quality}
 Path: ${readarr_bookfile_path}"
 
         # Build Readarr URL
-        if [ -n "$READARR_URL" ] && [ -n "$readarr_book_id" ]; then
-            url="${READARR_URL}/book/${readarr_book_id}"
+        if [ -n "$READARR_EB_URL" ] && [ -n "$readarr_book_id" ]; then
+            url="${READARR_EB_URL}/book/${readarr_book_id}"
         else
-            url="$READARR_URL"
+            url="$READARR_EB_URL"
         fi
 
         # Escape for JSON
@@ -159,10 +159,10 @@ Old Quality: ${readarr_bookfile_previousquality}
 New Quality: ${readarr_bookfile_quality}"
 
         # Build Readarr URL
-        if [ -n "$READARR_URL" ] && [ -n "$readarr_book_id" ]; then
-            url="${READARR_URL}/book/${readarr_book_id}"
+        if [ -n "$READARR_EB_URL" ] && [ -n "$readarr_book_id" ]; then
+            url="${READARR_EB_URL}/book/${readarr_book_id}"
         else
-            url="$READARR_URL"
+            url="$READARR_EB_URL"
         fi
 
         # Escape for JSON
@@ -193,8 +193,8 @@ Message: $readarr_health_issue_message
 Wiki: $readarr_health_issue_wiki"
 
         # Build URL - prefer Readarr system status page over wiki
-        if [ -n "$READARR_URL" ]; then
-            url="${READARR_URL}/system/status"
+        if [ -n "$READARR_EB_URL" ]; then
+            url="${READARR_EB_URL}/system/status"
         else
             url="$readarr_health_issue_wiki"
         fi
@@ -215,7 +215,7 @@ Wiki: $readarr_health_issue_wiki"
         # Escape for JSON
         title=$(escape_json "$title")
         body=$(escape_json "$body")
-        url=$(escape_json "$READARR_URL")
+        url=$(escape_json "$READARR_EB_URL")
 
         send_bark_notification "$title" "$body" "$url" ""
         ;;
