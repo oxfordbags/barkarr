@@ -1,0 +1,26 @@
+# =============================================================================
+# Shared Bark Configuration
+# =============================================================================
+# This file contains shared Bark settings used by all *arr notification scripts.
+# Configure these settings once and they will apply to all applications.
+# =============================================================================
+
+# Your Bark server URL (default: https://api.day.app)
+# For self-hosted Bark, use your server URL like: http://your-server:8080
+BARK_SERVER=""
+
+# Your Bark device key (REQUIRED - get this from the Bark iOS app)
+BARK_KEY=""
+
+# Notification sound (optional) - see Bark app for available sounds
+# Examples: alarm, bell, calypso, chime, glass, horn, etc.
+# Leave empty for default sound
+BARK_SOUND="bell"
+
+# Your *arr Aplication URLs (REQUIRED for notification links)
+# Do not include trailing slash
+SONARR_URL="" # http://localhost:8989
+RADARR_URL="" # http://localhost:7878
+READARR_AB_URL="" # http://localhost:8787
+READARR_EB_URL="" # http://localhost:8383
+PROWLARR_URL="" # http://localhost:9696
