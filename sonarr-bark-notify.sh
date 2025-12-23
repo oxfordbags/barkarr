@@ -101,7 +101,7 @@ EOF
 
 # Escape special characters for JSON
 escape_json() {
-    echo "$1" | sed 's/\\/\\\\/g; s/"/\\"/g; s/	/\\t/g' | tr -d '\n\r'
+    printf '%s' "$1" | sed ':a;N;$!ba;s/\\/\\\\/g;s/"/\\"/g;s/	/\\t/g;s/\n/\\n/g'
 }
 
 # -----------------------------------------------------------------------------
@@ -143,8 +143,7 @@ Indexer: ${sonarr_release_indexer}"
 
         body="$sonarr_series_title - $episodes
 ${sonarr_episodefile_episodetitles}
-Quality: ${sonarr_episodefile_quality}
-Path: ${sonarr_episodefile_relativepath}"
+Quality: ${sonarr_episodefile_quality}"
 
         # Build Sonarr URL
         if [ -n "$SONARR_URL" ] && [ -n "$sonarr_series_id" ]; then

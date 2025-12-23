@@ -101,7 +101,7 @@ EOF
 
 # Escape special characters for JSON
 escape_json() {
-    echo "$1" | sed 's/\\/\\\\/g; s/"/\\"/g; s/	/\\t/g' | tr -d '\n\r'
+    printf '%s' "$1" | sed ':a;N;$!ba;s/\\/\\\\/g;s/"/\\"/g;s/	/\\t/g;s/\n/\\n/g'
 }
 
 # -----------------------------------------------------------------------------
@@ -111,10 +111,8 @@ escape_json() {
 case "$readarr_eventtype" in
     Grab)
         title="📚 ReadarrAB: Book Grabbed"
-        body="$readarr_author_name - $readarr_book_title
-Quality: ${readarr_release_quality}
-Indexer: ${readarr_release_indexer}
-Size: ${readarr_release_size}"
+        body="$readarr_author_name - $readarr_book_title [${readarr_release_quality}]
+Indexer: ${readarr_release_indexer}"
 
         # Build Readarr URL
         if [ -n "$READARR_AB_URL" ] && [ -n "$readarr_book_id" ]; then
@@ -133,9 +131,7 @@ Size: ${readarr_release_size}"
 
     Download)
         title="✅ ReadarrAB: Book Downloaded"
-        body="$readarr_author_name - $readarr_book_title
-Quality: ${readarr_bookfile_quality}
-Path: ${readarr_bookfile_path}"
+        body="$readarr_author_name - $readarr_book_title [${readarr_bookfile_quality}]"
 
         # Build Readarr URL
         if [ -n "$READARR_AB_URL" ] && [ -n "$readarr_book_id" ]; then

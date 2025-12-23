@@ -101,7 +101,7 @@ EOF
 
 # Escape special characters for JSON
 escape_json() {
-    echo "$1" | sed 's/\\/\\\\/g; s/"/\\"/g; s/	/\\t/g' | tr -d '\n\r'
+    printf '%s' "$1" | sed ':a;N;$!ba;s/\\/\\\\/g;s/"/\\"/g;s/	/\\t/g;s/\n/\\n/g'
 }
 
 # -----------------------------------------------------------------------------
@@ -111,10 +111,8 @@ escape_json() {
 case "$radarr_eventtype" in
     Grab)
         title="🎬 Radarr: Movie Grabbed"
-        body="$radarr_movie_title ($radarr_movie_year)
-Quality: ${radarr_release_quality}
-Indexer: ${radarr_release_indexer}
-Size: ${radarr_release_size}"
+        body="$radarr_movie_title ($radarr_movie_year) [${radarr_release_quality}]
+Indexer: ${radarr_release_indexer}"
 
         # Build Radarr URL
         if [ -n "$RADARR_URL" ] && [ -n "$radarr_movie_id" ]; then
@@ -133,10 +131,7 @@ Size: ${radarr_release_size}"
 
     Download)
         title="✅ Radarr: Movie Downloaded"
-        body="$radarr_movie_title ($radarr_movie_year)
-Quality: ${radarr_moviefile_quality}
-Size: ${radarr_moviefile_scenename}
-Path: ${radarr_moviefile_relativepath}"
+        body="$radarr_movie_title ($radarr_movie_year) [${radarr_moviefile_quality}]"
 
         # Build Radarr URL
         if [ -n "$RADARR_URL" ] && [ -n "$radarr_movie_id" ]; then
@@ -157,8 +152,7 @@ Path: ${radarr_moviefile_relativepath}"
         title="⬆️ Radarr: Movie Upgraded"
         body="$radarr_movie_title ($radarr_movie_year)
 Old Quality: ${radarr_moviefile_previousquality}
-New Quality: ${radarr_moviefile_quality}
-Size: ${radarr_moviefile_scenename}"
+New Quality: ${radarr_moviefile_quality}"
 
         # Build Radarr URL
         if [ -n "$RADARR_URL" ] && [ -n "$radarr_movie_id" ]; then

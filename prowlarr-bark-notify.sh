@@ -101,7 +101,7 @@ EOF
 
 # Escape special characters for JSON
 escape_json() {
-    echo "$1" | sed 's/\\/\\\\/g; s/"/\\"/g; s/	/\\t/g' | tr -d '\n\r'
+    printf '%s' "$1" | sed ':a;N;$!ba;s/\\/\\\\/g;s/"/\\"/g;s/	/\\t/g;s/\n/\\n/g'
 }
 
 # -----------------------------------------------------------------------------
