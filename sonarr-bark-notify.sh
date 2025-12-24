@@ -111,9 +111,7 @@ escape_json() {
 case "$sonarr_eventtype" in
     Grab)
         title="📺 Sonarr: Episode Grabbed"
-        body="$sonarr_series_title - S${sonarr_release_seasonnumber}E${sonarr_release_episodenumbers}
-${sonarr_release_episodetitles}
-Quality: ${sonarr_release_quality}
+        body="$sonarr_series_title - S${sonarr_release_seasonnumber}E${sonarr_release_episodenumbers} ${sonarr_release_episodetitles} [${sonarr_release_quality}]
 Indexer: ${sonarr_release_indexer}"
 
         # Build Sonarr URL
@@ -138,12 +136,10 @@ Indexer: ${sonarr_release_indexer}"
         if [ -n "$sonarr_episodefile_episodenumbers" ]; then
             episodes="S${sonarr_episodefile_seasonnumber}E${sonarr_episodefile_episodenumbers}"
         else
-            episodes="S${sonarr_episodefile_seasonnumber}E${sonarr_episodefile_episodenumber}"
+            episodes="S${sonarr_episodefile_seasonnumber}E${sonarr_episodefile_episodenumber} ${sonarr_episodefile_episodetitle}"
         fi
 
-        body="$sonarr_series_title - $episodes
-${sonarr_episodefile_episodetitles}
-Quality: ${sonarr_episodefile_quality}"
+        body="$sonarr_series_title - $episodes [${sonarr_episodefile_quality}]"
 
         # Build Sonarr URL
         if [ -n "$SONARR_URL" ] && [ -n "$sonarr_series_id" ]; then
@@ -167,11 +163,10 @@ Quality: ${sonarr_episodefile_quality}"
         if [ -n "$sonarr_episodefile_episodenumbers" ]; then
             episodes="S${sonarr_episodefile_seasonnumber}E${sonarr_episodefile_episodenumbers}"
         else
-            episodes="S${sonarr_episodefile_seasonnumber}E${sonarr_episodefile_episodenumber}"
+            episodes="S${sonarr_episodefile_seasonnumber}E${sonarr_episodefile_episodenumber} ${sonarr_episodefile_episodetitle}"
         fi
 
         body="$sonarr_series_title - $episodes
-${sonarr_episodefile_episodetitles}
 Old Quality: ${sonarr_deletedrelativepaths}
 New Quality: ${sonarr_episodefile_quality}"
 
