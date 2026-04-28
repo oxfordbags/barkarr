@@ -139,7 +139,7 @@ Indexer: ${sonarr_release_indexer}"
             episodes="S${sonarr_episodefile_seasonnumber}E${sonarr_episodefile_episodenumber} ${sonarr_episodefile_episodetitle}"
         fi
 
-        body="$sonarr_series_title - $episodes [${sonarr_episodefile_quality}]"
+        body="$sonarr_series_title - $episodes [${sonarr_release_quality}]"
 
         # Build Sonarr URL
         if [ -n "$SONARR_URL" ] && [ -n "$sonarr_series_id" ]; then
